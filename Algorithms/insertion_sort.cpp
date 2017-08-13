@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
+#include "horseutils.cpp"
 using namespace std;
 
 void InsertionSort(vector<int>&);
-void DisplayVector(const vector<int>&);
 
 int main()
 {
@@ -12,13 +12,13 @@ int main()
 
     // display original sequence
 	cout << "Unsorted sequence: ";
-	DisplayVector(my_list);
+	horse::DisplayVector(my_list);
     
     InsertionSort(my_list);
 
     // display sorted sequence
 	cout << "Sorted sequence: ";
-	DisplayVector(my_list);
+	horse::DisplayVector(my_list);
 }
 
 void InsertionSort(vector<int>& list)
@@ -34,21 +34,5 @@ void InsertionSort(vector<int>& list)
     		i--;
     	}
     	list[i + 1] = anchor;
-    }
-}
-
-void DisplayVector(const vector<int>& list) 
-{
-    for(int i = 0; i < list.size(); i++)
-    {
-        cout << list[i];
-        if(i < list.size() - 1) 
-        {
-        	cout << ", ";
-        }
-        else 
-        {
-        	cout << "\n";
-        }
     }
 }
