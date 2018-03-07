@@ -1,9 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+#include <time.h>
 #include "horse_utils.cpp"
 using namespace std;
 
 void QuickSort(vector<int>&);
+int RandIdx(const vector<int>&);
 
 int main()
 {
@@ -21,7 +24,13 @@ int main()
     horse::DisplayVector(my_list);
 }
 
+int RandIdx(const vector<int>& list)
+{
+	srand(time(NULL));
+	return rand() % list.size();
+}
+
 void QuickSort(vector<int>& list)
 {
-	
+    cout << RandIdx(list) << "\n";
 }
