@@ -6,8 +6,8 @@ using namespace std;
 int Parent(const int);
 int Left(const int);
 int Right(const int);
-void BuildMaxHeap(vector<int>& list, const int r);
-void HeapSort(vector<int>& list);
+void BuildHeap(vector<int>&, const int, const bool);
+void HeapSort(vector<int>&, const bool);
 
 int main()
 {
@@ -23,9 +23,9 @@ int main()
     // display original sequence
     cout << "Unsorted sequence: ";
     horse::DisplayVector(my_list);
-    
-    HeapSort(my_list);
 
+    HeapSort(my_list, 1);
+    
     // display sorted sequence
     cout << "Sorted sequence: ";
     horse::DisplayVector(my_list);
@@ -46,7 +46,7 @@ int Right(const int idx)
     return idx * 2 + 2;
 }
 
-void BuildMaxHeap(vector<int>& list, const int r) 
+void BuildHeap(vector<int>& list, const int r, const bool direction) 
 {
     for(int i = r; i >= (r + 1) / 2; i--)
     {
@@ -56,7 +56,19 @@ void BuildMaxHeap(vector<int>& list, const int r)
             int q_val = list[q];
             int parent_idx = Parent(q);
             int parent_val = list[parent_idx];
-            if(parent_val < q_val)
+
+            // check direction
+            bool inequality = 0;
+            if(direction)
+            {
+                inequality = parent_val < q_val;
+            }
+            else
+            {
+                inequality = parent_val > q_val;
+            }
+
+            if(inequality)
             {
                 list[q] = parent_val;
                 list[parent_idx] = q_val;
@@ -66,13 +78,12 @@ void BuildMaxHeap(vector<int>& list, const int r)
     }
 }
 
-void HeapSort(vector<int>& list)
+void HeapSort(vector<int>& list, const bool direction=1)
 {
     int list_end = list.size() - 1;
     for(int i = list_end; i > 0; i--)
     {
-        cout << i << "\n";
-        BuildMaxHeap(list, i);
+        BuildHeap(list, i, direction);
         int tmp = list[0];
         list[0] = list[i];
         list[i] = tmp;
