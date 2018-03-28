@@ -31,17 +31,17 @@ int main()
     horse::DisplayVector(my_list);
 }
 
-int Parent(const int idx) 
+inline int Parent(const int idx) 
 {
     return idx - 1 >> 1;
 }
 
-int Left(const int idx)
+inline int Left(const int idx)
 {
     return (idx << 1) + 1;
 }
 
-int Right(const int idx)
+inline int Right(const int idx)
 {
     return (idx << 1) + 2;
 }

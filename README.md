@@ -12,6 +12,6 @@ g++ -o nameoffile.out compilethis.cpp
 ```
 [-] implement quick sort
 [-] modify heap_sort.cpp to use more efficient method from textbook
-[-] use bit-shifting and inline functions to solve Parent/Left/Right calculations
+[x] use bit-shifting and inline functions to solve Parent/Left/Right calculations
 
 ``` 
