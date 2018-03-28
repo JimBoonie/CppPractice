@@ -3,10 +3,16 @@
 #include "horse_utils.cpp"
 using namespace std;
 
+struct Heap {
+    vector<int> list;
+    int heap_end;
+};
+
 int Parent(const int);
 int Left(const int);
 int Right(const int);
-void BuildHeap(vector<int>&, const int, const bool);
+void Heapify(Heap&, const int, const bool);
+void BuildHeap(Heap&, const bool);
 void HeapSort(vector<int>&, const bool);
 
 int main()
@@ -46,46 +52,65 @@ inline int Right(const int idx)
     return (idx << 1) + 2;
 }
 
-void BuildHeap(vector<int>& list, const int r, const bool direction) 
+void Heapify(Heap &heap, const int r, const bool direction)
 {
-    for(int i = r; i >= (r + 1) / 2; i--)
-    {
-        int q = i;
-        while(q > 0)
-        {
-            int q_val = list[q];
-            int parent_idx = Parent(q);
-            int parent_val = list[parent_idx];
+    int left = Left(r);
+    int right = Right(r);
+    // if(left <= heap.heapsize)
+    // {
 
-            // check direction
-            bool inequality = 0;
-            if(direction)
-            {
-                inequality = parent_val < q_val;
-            }
-            else
-            {
-                inequality = parent_val > q_val;
-            }
+    // }
+}
 
-            if(inequality)
-            {
-                list[q] = parent_val;
-                list[parent_idx] = q_val;
-            }
-            q = parent_idx;
-        }
-    }
+void BuildHeap(Heap &heap, const bool direction) 
+{
+    int a = 1;
+    // for(int i = r; i >= (r + 1) / 2; i--)
+    // {
+    //     int q = i;
+    //     while(q > 0)
+    //     {
+    //         int q_val = heap.list[q];
+    //         int parent_idx = Parent(q);
+    //         int parent_val = heap.list[parent_idx];
+
+    //         // check direction
+    //         bool inequality = 0;
+    //         if(direction)
+    //         {
+    //             inequality = parent_val < q_val;
+    //         }
+    //         else
+    //         {
+    //             inequality = parent_val > q_val;
+    //         }
+
+    //         if(inequality)
+    //         {
+    //             heap.list[q] = parent_val;
+    //             heap.list[parent_idx] = q_val;
+    //         }
+    //         q = parent_idx;
+    //     }
+    // }
 }
 
 void HeapSort(vector<int>& list, const bool direction=1)
 {
-    int list_end = list.size() - 1;
+    Heap myheap;
+    myheap.list = list;
+    myheap.heap_end = myheap.list.size() - 1;
+   
+    BuildHeap(myheap, direction);
+    int list_end = myheap.list.size() - 1;
     for(int i = list_end; i > 0; i--)
     {
-        BuildHeap(list, i, direction);
-        int tmp = list[0];
-        list[0] = list[i];
-        list[i] = tmp;
+        // exchange list[1] with list[i]
+        int tmp = myheap.list[0];
+        myheap.list[0] = myheap.list[i];
+        myheap.list[i] = tmp;
+
+        myheap.heap_end -= 1;
+        Heapify(myheap, 0, direction);
     }
 }
