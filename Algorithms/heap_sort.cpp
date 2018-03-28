@@ -33,17 +33,17 @@ int main()
 
 int Parent(const int idx) 
 {
-    return (idx - 1) / 2;
+    return idx - 1 >> 1;
 }
 
 int Left(const int idx)
 {
-    return idx * 2 + 1;
+    return (idx << 1) + 1;
 }
 
 int Right(const int idx)
 {
-    return idx * 2 + 2;
+    return (idx << 1) + 2;
 }
 
 void BuildHeap(vector<int>& list, const int r, const bool direction) 
